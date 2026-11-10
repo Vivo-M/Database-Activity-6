@@ -12,7 +12,8 @@ const numbers = ['YearOfWork', 'Width', 'Height', 'Cost', 'MSRP'];
 const long = ['Description', 'Excerpt', 'GoogleDescription', 'JsonAnnotations'];
 const artist = p => [p.FirstName, p.LastName].filter(Boolean).join(' ');
 function image(p) {
-  const img = document.createElement('img'); img.src = `art/works/square-medium/${encodeURIComponent(p.ImageFileName)}`; img.alt = p.Title; img.loading = 'lazy';
+  const filename = /\.[^./]+$/.test(p.ImageFileName) ? p.ImageFileName : `${p.ImageFileName}.jpg`;
+  const img = document.createElement('img'); img.src = `art/works/square-medium/${encodeURIComponent(filename)}`; img.alt = p.Title; img.loading = 'lazy';
   img.addEventListener('error', () => { img.src = 'placeholder.svg'; }, { once: true }); return img;
 }
 function renderList() {

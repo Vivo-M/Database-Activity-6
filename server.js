@@ -4,7 +4,7 @@ import { mkdirSync, copyFileSync, existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
-const root = fileURLToPath(new URL('.', import.meta.url));
+const root = path.resolve(fileURLToPath(new URL('.', import.meta.url)));
 const fields = ['Title', 'ArtistID', 'GalleryID', 'ShapeID', 'ImageFileName', 'YearOfWork', 'Medium', 'Width', 'Height', 'Cost', 'MSRP', 'AccessionNumber', 'CopyrightText', 'MuseumLink', 'WikiLink', 'Description', 'Excerpt', 'GoogleLink', 'GoogleDescription', 'JsonAnnotations'];
 const numeric = new Set(['ArtistID', 'GalleryID', 'ShapeID', 'YearOfWork', 'Width', 'Height', 'Cost', 'MSRP']);
 const select = `SELECT p.*, a.FirstName, a.LastName, g.GalleryName, s.ShapeName FROM Paintings p LEFT JOIN Artists a ON p.ArtistID=a.ArtistID LEFT JOIN Galleries g ON p.GalleryID=g.GalleryID LEFT JOIN Shapes s ON p.ShapeID=s.ShapeID`;
